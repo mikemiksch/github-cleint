@@ -28,7 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GitHub.shared.tokenRequestFor(url: url, saveOptions: .userDefaults) { (success) in
             
             if success {
+                guard let accessToken = UserDefaults.standard.getAccessToken() else {return}
+                UserDefaults.standard.save(accessToken: accessToken)
                 print("YAY! Access Token")
+                print(accessToken)
+                print(UserDefaults.standard)
             } else {
                 print("Bummer! No success")
             }
