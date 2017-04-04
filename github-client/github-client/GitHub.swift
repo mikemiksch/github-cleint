@@ -33,7 +33,7 @@ class GitHub {
         
         if let requestURL = URL(string: "\(kOAuthBaseURLString)authorize?client_id=\(gitHubClientID)\(parametersString)") {
             print(requestURL.absoluteString)
-            
+
             UIApplication.shared.open(requestURL)
         }
         
@@ -69,7 +69,15 @@ class GitHub {
                     guard let data = data else { complete(success: false); return }
                     
                     if let dataString = String(data: data, encoding: .utf8) {
-                        print(dataString)
+                        if
+                            let start = dataString.range(of: "access_token="),
+                            let end = dataString.range(of: "&", range: start.lowerBound..<dataString.endIndex)
+                        {
+                            var accessToken = dataString[start.lowerBound..<end.upperBound]
+                            accessToken = accessToken.replacingOccurrences(of: "access_token=", with: "")
+                            UserDefaults.standard.save(accessToken: accessToken)
+                            print("This is the access token \(accessToken)")
+                        }
                         complete(success: true)
                         
                     }

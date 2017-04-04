@@ -8,6 +8,8 @@
 
 import UIKit
 
+
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -15,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
         return true
     }
 
@@ -29,10 +30,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             if success {
                 guard let accessToken = UserDefaults.standard.getAccessToken() else {return}
-                UserDefaults.standard.save(accessToken: accessToken)
                 print("YAY! Access Token")
-                print(accessToken)
-                print(UserDefaults.standard)
+
             } else {
                 print("Bummer! No success")
             }
