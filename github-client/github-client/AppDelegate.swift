@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             if let authViewController = self.authController, let repoViewController = self.repoController {
                 
                 authViewController.dismissAuthController()
-                repoViewController.update() 
+                repoViewController.update()
                 
             }
         }
