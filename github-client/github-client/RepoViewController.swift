@@ -11,6 +11,7 @@ import UIKit
 class RepoViewController: UIViewController {
     
     static var repositories = [Repository]()
+    @IBOutlet weak var repoTableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +23,16 @@ class RepoViewController: UIViewController {
     func update() {
         print("Update repo controller here!")
         GitHub.shared.getRepos { (repositories) in
-            //update tableView
+            self.navigationItem.title = "My Repositories"
+            
+            let repoNib = UINib(nibName: "RepoCellNib", bundle: nil)
+            
+            self.repoTableView.register(repoNib, forCellReuseIdentifier: RepoCellNib.identifier)
+            self.repoTableView.estimatedRowHeight = 50
+            self.repoTableView.rowHeight = UITableViewAutomaticDimension
+            
+            self.repoTableView.dataSource = self
+//        self.repoTableView.delegate = self
         }
     }
 
@@ -44,8 +54,6 @@ extension RepoViewController : UITableViewDataSource {
     }
 
 }
-
-
 
 //
 ////MARK: UITableViewDelegate

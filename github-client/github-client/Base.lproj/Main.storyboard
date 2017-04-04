@@ -98,6 +98,9 @@
                             <constraint firstItem="xgN-Wo-Dn5" firstAttribute="top" secondItem="k5M-Ee-HxH" secondAttribute="bottom" id="pAb-7J-t7s"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="repoTableView" destination="k5M-Ee-HxH" id="BYB-51-CAa"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M00-je-5Nm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
