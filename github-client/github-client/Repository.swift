@@ -15,9 +15,13 @@ class Repository {
     let language : String?
     
     init?(json: [String : Any]) {
-        print("Complete this for lab")
+        if let name = json["name"] as? String {
+            self.name = name
+            self.description = json["description"] as? String
+            self.language = json["language"] as? String
+        }
         
-        print(json)
+//        print(json)
         
         return nil
     }

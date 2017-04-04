@@ -25,3 +25,23 @@ class RepoViewController: UIViewController {
     }
 
 }
+
+
+//MARK: UITableViewDataSource
+//extension RepoViewController : UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 
+//    }
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        <#code#>
+//    }
+//    
+//}
+//
+////MARK: UITableViewDelegate
+//extension RepoViewController : UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        <#code#>
+//    }
+//}

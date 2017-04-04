@@ -14,14 +14,17 @@ class GitHubAuthController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginButton.layer.cornerRadius = 25
         // Do any additional setup after loading the view.
     }
     
     
-    @IBAction func printTokenPressed(_ sender: Any) {
-        let token = UserDefaults.standard.getAccessToken()
-        print(token)
-    }
+//    @IBAction func printTokenPressed(_ sender: Any) {
+//        let token = UserDefaults.standard.getAccessToken()
+//        print(token)
+//    }
+//    
+    
     
     @IBAction func loginButtonPressed(_ sender: Any) {
         let parameters = ["scope" : "email,user,repo"]
