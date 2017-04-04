@@ -15,25 +15,49 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
+    var authController : GitHubAuthController?
+    var repoController : RepoViewController?
+    
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+        
+        if let token = UserDefaults.standard.getAccessToken() {
+            print(token)
+        } else {
+            presentAuthController()
+        }
+        
         return true
+    }
+    
+    func presentAuthController() {
+        if let repoViewController = self.window?.rootViewController as? RepoViewController, let storyboard = repoViewController.storyboard {
+            
+            if let authViewController = storyboard.instantiateViewController(withIdentifier: GitHubAuthController.identifier) as? GitHubAuthController {
+                
+                repoViewController.addChildViewController(authViewController)
+                repoViewController.view.addSubview(authViewController.view)
+                
+                authViewController.didMove(toParentViewController: repoViewController)
+                
+                self.authController = authViewController
+                self.repoController = repoViewController
+                
+            }
+        }
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
 
-        let code = try? GitHub.shared.getCodeFrom(url: url)
-        
-        print(code)
+//        let code = try? GitHub.shared.getCodeFrom(url: url)
         
         GitHub.shared.tokenRequestFor(url: url, saveOptions: .userDefaults) { (success) in
             
-            if success {
-                guard let accessToken = UserDefaults.standard.getAccessToken() else {return}
-                print("YAY! Access Token")
-
-            } else {
-                print("Bummer! No success")
+            if let authViewController = self.authController, let repoViewController = self.repoController {
+                
+                authViewController.dismissAuthController()
+                repoViewController.update() 
+                
             }
         }
         

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8399570B1E940C1B00E265B8 /* RepoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8399570A1E940C1B00E265B8 /* RepoViewController.swift */; };
+		8399570D1E940D5F00E265B8 /* UIExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8399570C1E940D5F00E265B8 /* UIExtensions.swift */; };
 		83E7F1211E92AF770099D6F3 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83E7F1201E92AF770099D6F3 /* AppDelegate.swift */; };
 		83E7F1261E92AF770099D6F3 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 83E7F1241E92AF770099D6F3 /* Main.storyboard */; };
 		83E7F1281E92AF770099D6F3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 83E7F1271E92AF770099D6F3 /* Assets.xcassets */; };
@@ -18,6 +20,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		8399570A1E940C1B00E265B8 /* RepoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RepoViewController.swift; sourceTree = "<group>"; };
+		8399570C1E940D5F00E265B8 /* UIExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIExtensions.swift; sourceTree = "<group>"; };
 		83E7F11D1E92AF770099D6F3 /* github-client.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "github-client.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		83E7F1201E92AF770099D6F3 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		83E7F1251E92AF770099D6F3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -71,6 +75,7 @@
 		83E7F1361E92CB760099D6F3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				8399570C1E940D5F00E265B8 /* UIExtensions.swift */,
 				83E7F1321E92C91C0099D6F3 /* GitHub.swift */,
 				83E7F1501E92EC310099D6F3 /* FoundationExtensions.swift */,
 			);
@@ -89,6 +94,7 @@
 		83E7F1381E92CBA00099D6F3 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				8399570A1E940C1B00E265B8 /* RepoViewController.swift */,
 				83E7F13A1E92CE770099D6F3 /* GitHubAuthController.swift */,
 			);
 			name = Controller;
@@ -179,7 +185,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				83E7F1331E92C91C0099D6F3 /* GitHub.swift in Sources */,
+				8399570D1E940D5F00E265B8 /* UIExtensions.swift in Sources */,
 				83E7F1511E92EC310099D6F3 /* FoundationExtensions.swift in Sources */,
+				8399570B1E940C1B00E265B8 /* RepoViewController.swift in Sources */,
 				83E7F1211E92AF770099D6F3 /* AppDelegate.swift in Sources */,
 				83E7F13B1E92CE770099D6F3 /* GitHubAuthController.swift in Sources */,
 				83E7F1351E92CB6B0099D6F3 /* tokens.swift in Sources */,
@@ -346,6 +354,7 @@
 				83E7F1311E92AF770099D6F3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

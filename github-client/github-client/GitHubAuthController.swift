@@ -10,6 +10,24 @@ import UIKit
 
 class GitHubAuthController: UIViewController {
 
+    @IBOutlet weak var loginButton: UIButton!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+    }
+    
+    
+    @IBAction func printTokenPressed(_ sender: Any) {
+        let token = UserDefaults.standard.getAccessToken()
+        print(token)
+    }
+    
+    @IBAction func loginButtonPressed(_ sender: Any) {
+        let parameters = ["scope" : "email,user,repo"]
+        GitHub.shared.oAuthRequestWith(parameters: parameters)
+    }
+
     func disableButton() {
         if UserDefaults.standard.getAccessToken() != nil {
             print("You have an access token")
@@ -17,27 +35,12 @@ class GitHubAuthController: UIViewController {
             loginButton.isEnabled = false
             loginButton.setTitle("YOU ARE ALREADY LOGGED IN", for: .normal)
             loginButton.backgroundColor = UIColor.red
-        } 
+        }
     }
     
-    @IBOutlet weak var loginButton: UIButton!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-//        disableButton()
-        // Do any additional setup after loading the view.
+    func dismissAuthController() {
+        self.view.removeFromSuperview()
+        self.removeFromParentViewController()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        disableButton()
-    }
-    
-    @IBAction func printTokenPressed(_ sender: Any) {
-    }
-    
-    @IBAction func loginButtonPressed(_ sender: Any) {
-//        disableButton()
-        let parameters = ["scope" : "email,user"]
-        GitHub.shared.oAuthRequestWith(parameters: parameters)
-    }
-
 }
