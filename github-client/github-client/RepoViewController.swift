@@ -28,7 +28,7 @@ class RepoViewController: UIViewController {
             let repoNib = UINib(nibName: "RepoCellNib", bundle: nil)
             
             self.repoTableView.register(repoNib, forCellReuseIdentifier: RepoCellNib.identifier)
-            self.repoTableView.estimatedRowHeight = 50
+            self.repoTableView.estimatedRowHeight = 150
             self.repoTableView.rowHeight = UITableViewAutomaticDimension
             
             self.repoTableView.dataSource = self
