@@ -139,7 +139,7 @@ class GitHub {
             
             if let data = data {
                 
-                var repositories = [Repository]()
+//                var repositories = [Repository]()
 
                 do {
                     
@@ -148,12 +148,12 @@ class GitHub {
                         
                         for repositoryJSON in rootJSON {
                             if let repo = Repository(json: repositoryJSON) {
-                                repositories.append(repo)
-                                print(repo)
+                                RepoViewController.repositories.append(repo)
+                                print(repo.name, repo.description, repo.language)
                             }
                         }
-                        print(repositories.count)
-                        returnToMain(results: repositories)
+                        print(RepoViewController.repositories.count)
+                        returnToMain(results: RepoViewController.repositories)
                         
                     }
                     

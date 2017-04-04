@@ -9,6 +9,8 @@
 import UIKit
 
 class RepoViewController: UIViewController {
+    
+    static var repositories = [Repository]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,18 +28,25 @@ class RepoViewController: UIViewController {
 
 }
 
-
 //MARK: UITableViewDataSource
-//extension RepoViewController : UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 
-//    }
-//    
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        <#code#>
-//    }
-//    
-//}
+extension RepoViewController : UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return RepoViewController.repositories.count
+    }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RepoCellNib.identifier, for: indexPath) as! RepoCellNib
+        
+        let repo = RepoViewController.repositories[indexPath.row]
+        
+        cell.repo = repo
+        return cell
+    }
+
+}
+
+
+
 //
 ////MARK: UITableViewDelegate
 //extension RepoViewController : UITableViewDelegate {
