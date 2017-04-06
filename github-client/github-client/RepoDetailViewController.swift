@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class RepoDetailViewController: UIViewController {
     
@@ -18,9 +19,16 @@ class RepoDetailViewController: UIViewController {
     @IBOutlet weak var repoRatingLabel: UILabel!
     @IBOutlet weak var repoForkedStatusLabel: UILabel!
     @IBOutlet weak var repoDescriptionLabel: UILabel!
+    
+    
     @IBAction func dismissButtonPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-//        dismissRepoDetailViewController()
+        self.dismiss(animated: true, completion: nil)
+
+    }
+    @IBAction func moreDetailsPressed(_ sender: Any) {
+        guard let repo = repo else { return }
+        presentSafariViewControllerWith(urlString: repo.repoUrlString)
+//        presentWebViewControllerWith(urlString: repo.repoUrlString)
     }
 
     override func viewDidLoad() {
@@ -46,11 +54,6 @@ class RepoDetailViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func dismissRepoDetailViewController() {
-        self.view.removeFromSuperview()
-        self.removeFromParentViewController()
-    }
 
     
     func getDate(_ string: String) -> String? {
@@ -63,4 +66,34 @@ class RepoDetailViewController: UIViewController {
         }
         return nil
     }
+    
+    func presentSafariViewControllerWith(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        let safariController = SFSafariViewController(url: url)
+        self.present(safariController, animated: true, completion: nil)
+    }
+    
+    func presentWebViewControllerWith(urlString: String) {
+        
+        let webController = WebViewController()
+        webController.url = urlString
+        
+        self.present(webController, animated: true, completion: nil)
+        
+    }
+    
+}
+
+
+//MARK: UIViewControllerTransitioningDelegate
+extension RepoDetailViewController : UIViewControllerTransitioningDelegate {
+    
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomTransition()
+    }
+    
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+        return CustomTransition()
+    }
+    
 }

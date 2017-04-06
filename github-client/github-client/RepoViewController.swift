@@ -30,6 +30,7 @@ class RepoViewController: UIViewController {
         
         self.repoTableView.dataSource = self
         self.repoTableView.delegate = self
+        self.searchBar.delegate = self
         
         
         update()
@@ -107,6 +108,12 @@ extension RepoViewController : UITableViewDataSource, UITableViewDelegate {
 //MARK: UISearchBarDelegate
 extension RepoViewController : UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if !searchText.validate() {
+            let lastIndex = searchText.index(before: searchText.endIndex)
+            searchBar.text = searchText.substring(to: lastIndex)
+            
+        }
         
         if let searchedText = searchBar.text {
             self.displayRepos = self.allRepos.filter({($0.name?.contains(searchedText))!})
