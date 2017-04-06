@@ -35,11 +35,6 @@ class GitHub {
         
         self.components.scheme = "https"
         self.components.host = "api.github.com"
-        
-        if let token = UserDefaults.standard.getAccessToken() {
-            let queryItem = URLQueryItem(name: "access_token", value: token)
-            self.components.queryItems = [queryItem]
-        }
     }
 
     func oAuthRequestWith(parameters: [String : String]) {
@@ -50,7 +45,6 @@ class GitHub {
         }
         
         if let requestURL = URL(string: "\(kOAuthBaseURLString)authorize?client_id=\(gitHubClientID)\(parametersString)") {
-            print(requestURL.absoluteString)
 
             UIApplication.shared.open(requestURL)
         }
@@ -87,7 +81,6 @@ class GitHub {
                     guard let data = data else { complete(success: false); return }
                     
                     if let dataString = String(data: data, encoding: .utf8), let token = self.accessTokenFrom(dataString) {
-                        print("accessTokenFrom: \(token)")
                         UserDefaults.standard.save(accessToken: token)
 
                         complete(success: true)
@@ -120,6 +113,11 @@ class GitHub {
     
     func getRepos(completion: @escaping FetchReposCompletion) {
         
+        if let token = UserDefaults.standard.getAccessToken() {
+            let queryItem = URLQueryItem(name: "access_token", value: token)
+            self.components.queryItems = [queryItem]
+        }
+        
         func returnToMain(results: [Repository]?) {
             OperationQueue.main.addOperation {
                 completion(results)
@@ -139,21 +137,18 @@ class GitHub {
             
             if let data = data {
                 
-//                var repositories = [Repository]()
+                var repositories = [Repository]()
 
                 do {
                     
                     if let rootJSON = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [[String : Any]] {
-                        print(rootJSON)
                         
                         for repositoryJSON in rootJSON {
                             if let repo = Repository(json: repositoryJSON) {
-                                RepoViewController.repositories.append(repo)
-                                print(repo.name, repo.description, repo.language)
+                                repositories.append(repo)
                             }
                         }
-                        print(RepoViewController.repositories.count)
-                        returnToMain(results: RepoViewController.repositories)
+                        returnToMain(results: repositories)
                         
                     }
                     
